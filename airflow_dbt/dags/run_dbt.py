@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.providers.standard.operators.bash import BashOperator
 from datetime import datetime
 
 default_args = {
@@ -9,7 +9,7 @@ default_args = {
 
 with DAG('dbt_databricks_pipeline',
          default_args=default_args,
-         schedule_interval='@daily',
+         schedule='@daily',
          catchup=False) as dag:
 
     dbt_seed = BashOperator(
